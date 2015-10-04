@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="_video.css">
+</head>
+<body>
+
+<div class="overlay"></div>
+<div id="ytplayer"></div>
+
+<script src="https://www.youtube.com/player_api"></script>
+<script>
+  var io = require('../lib/socket.io-client/socket.io.js');
+  var socket = io.connect('http://127.0.0.1:7000');
+  var ipc = require('ipc');
+  window.$ = window.jQuery = require('../lib/jquery/jquery-1.11.3');
+
+  var player, state = -1;
+
+  function hasVideo() {
+    return (player && player.destroy);
+  }
+
+  function onYouTubePlayerAPIReady() {
+
+    ipc.on('videoData', function(videoId) {
+      if (hasVideo()) {
+        player.destroy();
+      }
+
+      player = new YT.Player('ytplayer', {
+        height: '390',
+        width: '640',
+        videoId: videoId,
+        playerVars: {
+          disablekb: 0,
+          enablejsapi: 1,
+          controls: 0,
+          autoplay: 1,
+          fs: 0,
+          showinfo: 0,
+          modestbranding: 1
+        }
+      });
+
+      /*player.addEventListener("onStateChange", function(d) {
+        socket.emit('sendState', d.data);
+      });*/
+
+      $('#ytplayer').css({ width: $(window).innerWidth() + 'px', height: $(window).innerHeight() + 'px' });
+    });
+
+    socket.on('pauseVideo', function() {
+      if (hasVideo()) {
+        player.pauseVideo();
+      }
+    });
+
+    socket.on('playVideo', function() {
+      if (hasVideo()) {
+        player.playVideo();
+      }
+    });
+
+    socket.on('stopVideo', function() {
+      if (hasVideo()) {
+        player.pauseVideo();
+        player.seekTo(0);
+      }
+    });
+
+    socket.on('muteVideo', function() {
+      if (hasVideo()) {
+        player.mute();
+      }
+    });
+
+    socket.on('unMuteVideo', function() {
+      if (hasVideo()) {
+        player.unMute();
+      }
+    });
+
+    socket.on('setVolume', function(volume) {
+      if (hasVideo()) {
+        player.setVolume(volume);
+      }
+    });
+
+  }
+
+  ipc.on('userData', function(id) {
+    socket.emit('joinRoom', id);
+  });
+
+  $(function(){
+    $('#ytplayer').css({ width: $(window).innerWidth() + 'px', height: $(window).innerHeight() + 'px' });
+
+    $(window).resize(function(){
+      $('#ytplayer').css({ width: $(window).innerWidth() + 'px', height: $(window).innerHeight() + 'px' });
+    });
+  });
+
+</script>
+</body>
+</html>

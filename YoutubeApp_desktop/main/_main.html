@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="_main.css">
+</head>
+<body>
+
+  <div class="center">
+    <form action="" name="login-form">
+      <img src="">
+      <input type="text" name="login" placeholder="login" required>
+      <input type="password" name="password" placeholder="password" required>
+      <input type="submit" class="submit-btn">
+    </form>
+    <h1 style="display: none">YoutubeApp</h1>
+    <h3 style="display: none"></h3><br>
+    <input style="display: none" onclick="logout()" id="logout" type="submit" class="submit-btn" value="logout">
+  </div>
+
+
+<script>
+  var io = require('../lib/socket.io-client/socket.io.js');
+  var socket = io.connect('http://127.0.0.1:7000');
+  var ipc = require('ipc');
+  window.$ = window.jQuery = require('../lib/jquery/jquery-1.11.3');
+
+  // get uid
+  var uid = window.localStorage.getItem('youtubeAppUid');
+  var token = window.localStorage.getItem('youtubeApp');
+
+  ipc.on('videoClosed', function() {
+    socket.emit('closeVideo');
+  });
+
+  socket.on('launchVideo', function(videoId) {
+    ipc.send('launchVideo', videoId);
+  });
+
+
+  // form validation
+  $('form[name="login-form"]').submit(function(e) {
+    e.preventDefault();
+
+    var inputs = $(this).find("input");
+    var empty = inputs.filter(function() {
+      if (this.type !== 'submit') {
+        return this.value === "";
+      }
+    });
+
+    if(!empty.length) {
+      var data = {};
+      for (var i = 0; i < inputs.length; i++) {
+        if (inputs[i].type !== 'submit') {
+          data[inputs[i].name] = inputs[i].value;
+        }
+      }
+
+      if (uid) {
+        data.uid = uid;
+      }
+
+      socket.emit('signin', data);
+    }
+
+    for (var i = 0; i < inputs.length; i++) {
+      if (inputs[i].type !== 'submit') {
+        inputs[i].value = '';
+      }
+    }
+  });
+
+  // login
+  if (token) {
+    socket.emit('isLoggedIn', token);
+  }
+
+  socket.on('loggedIn', function(user) {
+    if ((user||{})._id) {
+      changeToConnect(user);
+      ipc.send('login', user._id);
+      socket.emit('joinRoom', user._id);
+    }
+  });
+
+  socket.on('signin', function(user) {
+    if (user) {
+      if (user.token) {
+        window.localStorage.setItem('youtubeApp', user.token);
+      }
+
+      if (user.uid) {
+        window.localStorage.setItem('youtubeAppUid', user.uid);
+      }
+
+      changeToConnect(user);
+      ipc.send('login', user._id);
+      socket.emit('joinRoom', user._id);
+    }
+  });
+
+  socket.on('logoutMobile', function() {
+    ipc.send('logoutMobile');
+  });
+
+  function logout() {
+    ipc.send('logoutDesktop');
+    socket.emit('logoutDesktop');
+
+    if (window.localStorage.getItem('youtubeApp')) {
+      window.localStorage.removeItem('youtubeApp');
+    }
+
+    if (window.localStorage.getItem('youtubeAppUid')) {
+      window.localStorage.removeItem('youtubeAppUid');
+    }
+
+    changeToSignin();
+  }
+
+  function changeToConnect(user) {
+    $('.center form').hide();
+    $('.center h1').show();
+    $('.center h3').show().text(user.username);
+    $('.center #logout').show();
+  }
+
+  function changeToSignin() {
+    $('.center form').show();
+    $('.center h1').hide();
+    $('.center h3').hide().text('');
+    $('.center #logout').hide();
+  }
+
+</script>
+</body>
+</html>

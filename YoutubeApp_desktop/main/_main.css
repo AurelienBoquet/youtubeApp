@@ -1,0 +1,72 @@
+html {
+  background-color: #f2f2f2;
+  font-family: Helvetica Neue, Helvetica, Arial;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 195px;
+  width: 355px;
+}
+
+.center input[type="text"],
+.center input[type="password"]
+{
+  height: 50px;
+  border: none;
+  border-bottom: 3px solid #ef473a;
+  background-color: white;
+  width: 340px;
+  padding-left: 15px;
+  font-size: 17px;
+  margin-bottom: 10px;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: all 260ms ease;
+  border-radius: 2px;
+}
+
+.center input[type="text"]:focus,
+.center input[type="password"]:focus {
+  padding: 6px 0 6px 15px;
+  outline: none;
+}
+
+.center .submit-btn {
+  border: none;
+  margin-top: 5px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 50px;
+  width: 355px;
+  line-height: 47px;
+  font-size: 19px;
+  font-weight: 600;
+  color: white;
+  background-color: #ef473a;
+  border-bottom: 4px solid #81251f;
+}
+
+.center h1 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.center h3 {
+  text-align: center;
+  margin: 0;
+}
+
+.center .submit-btn:active{
+  background-color: #81251f;
+
+}
+
+.center .submit-btn:focus {
+  outline: none;
+}
+

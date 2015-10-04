@@ -1,0 +1,8 @@
+{
+  "name": "YoutubeApp",
+  "app_id": "d1247a23",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ]
+}

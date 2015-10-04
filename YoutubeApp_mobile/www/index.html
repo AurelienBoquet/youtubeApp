@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+    <title>YoutubeApp</title>
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- socket.io -->
+    <script type="text/javascript" src="lib/socket.io-client/socket.io.js"></script>
+
+    <!-- your app's js -->
+    <script src="app/app.js"></script>
+
+    <!-- app css using sass -->
+    <link href="css/ionic.app.css" rel="stylesheet">
+
+  </head>
+  <body ng-app="youtubeApp">
+
+    <!--
+      The views will be rendered in the <ion-nav-view> directive below
+      Templates are in the /templates folder (but you could also
+      have templates inline in this html file if you'd like).
+    -->
+    <ion-nav-view></ion-nav-view>
+
+
+    <!-- inject:js -->
+    <script src="app/utils/connection.service.js"></script>
+    <script src="app/utils/localStorage.service.js"></script>
+    <script src="app/utils/socket.service.js"></script>
+    <script src="app/utils/video.service.js"></script>
+    <script src="app/utils/youtube.service.js"></script>
+    <script src="app/components/header/header.controller.js"></script>
+    <script src="app/components/menu/menu.controller.js"></script>
+    <script src="app/utils/filter/filter.js"></script>
+    <script src="app/routes/login/login.controller.js"></script>
+    <script src="app/routes/login/login.route.js"></script>
+    <script src="app/routes/main/main.controller.js"></script>
+    <script src="app/routes/main/main.route.js"></script>
+    <script src="app/routes/main/home/home.controller.js"></script>
+    <script src="app/routes/main/home/home.route.js"></script>
+    <!-- endinject -->
+
+    <!-- Script -->
+    <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+  </body>
+</html>

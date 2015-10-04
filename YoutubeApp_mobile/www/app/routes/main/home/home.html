@@ -1,0 +1,75 @@
+<ion-view class="home">
+
+  <ion-content>
+
+    <div ng-hide="videoList.items" class="research padding">
+
+      <!-- google connexion -->
+      <div class="full-width cont padding google-connect" ng-if="!isApiLoaded">
+        <img src="img/google-logo.png" alt="google logo">
+        <p>A google account is needed</p>
+        <button class="button button-block button-assertive" ng-click="loadApi()">Connect</button>
+      </div>
+
+
+      <div ng-if="noVideoFound" class="cont full-width noVideo padding">
+        No video Found
+      </div>
+
+      <div ng-show="!hasResearched" class="search full-width vert-align-cont">
+        <div class="cont full-width vert-align padding">
+          <label for="search">Search videos</label>
+          <input id="search" ng-model="form.search" type="text">
+          <button class="button button-block button-assertive" ng-click="searchVideo()">Search</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- video list -->
+    <div class="list card" ng-repeat="video in videoList.items" ng-click="chooseVideo(video)">
+      <a href="#" class="item item-avatar">
+        <h2 ng-bind="video.snippet.title"></h2>
+        <p ng-bind="video.snippet.title"></p>
+      </a>
+
+      <div class="item item-image">
+        <img src="" ng-src="{{video.snippet.thumbnails.medium.url}}">
+      </div>
+    </div>
+
+    <ion-infinite-scroll ng-if="hasMoreVideo" distance="20%" immediate-check="false" on-infinite="loadMoreVideo()"></ion-infinite-scroll>
+
+    <!-- graphical fix -->
+    <div ng-if="videoList.items" style="padding-bottom: 44px"></div>
+
+  </ion-content>
+
+
+  <div class="footer-ctrl" ng-class="{'open': footerIsOpen}">
+    <div class="top-bar" ng-click="openFooter()"></div>
+    <!--<div class="item range time-bar">
+      <i class="icon" ng-bind="duration | secondToTime"></i>
+      <input type="range" name="" ng-model="duration" min="0" max="{{videoStats.duration}}" ng-change="setDuration()">
+      <i class="icon" ng-cloak ng-bind="videoStats.duration | secondToTime"></i>
+    </div>-->
+    <div class="action-bar">
+      <div class="button-footer left">
+        <!-- ion-pause ion-play -->
+        <i class="icon" ng-class="playPauseClass" ng-click="playPauseVideo()"></i>
+      </div>
+      <div class="button-footer right">
+        <!-- ion-volume-mute ion-volume-medium -->
+        <i class="icon" ng-class="muteUnMuteClass" ng-click="muteUnMuteVideo()"></i>
+      </div>
+      <div class="button-footer mid">
+        <i class="icon ion-stop" ng-click="stopVideo()"></i>
+      </div>
+    </div>
+    <div class="item range bottom-bar">
+      <i class="icon ion-volume-low"></i>
+      <input type="range" name="volume" ng-model="volume" ng-change="setVolume()">
+      <i class="icon ion-volume-high"></i>
+    </div>
+  </div>
+</ion-view>

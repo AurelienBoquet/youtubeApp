@@ -1,0 +1,110 @@
+// transition
+$ts_time: 300ms;
+$ts_type: linear;
+
+// height
+$h_top: 1px;
+$h_bottom: 55px;
+$h_time: 60px;
+$h_action: 70px;
+
+// transform
+$tf_translate: translate(0, 105%);
+$tf_translate_open: translate(0, 0);
+
+.footer-ctrl {
+  position: fixed;
+  bottom: 44px;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  -moz-box-shadow: 0px -1px 2px 0px #c0c0c0;
+  -webkit-box-shadow: 0px -1px 2px 0px #c0c0c0;
+  -o-box-shadow: 0px -1px 2px 0px #c0c0c0;
+  box-shadow: 0px -1px 2px 0px #c0c0c0;
+  filter:progid:DXImageTransform.Microsoft.Shadow(color=#c0c0c0, Direction=90, Strength=2);
+  text-align: center;
+
+  -webkit-transform: $tf_translate;
+  -moz-transform:    $tf_translate;
+  -o-transform:      $tf_translate;
+  transform:         $tf_translate;
+
+  -webkit-transition:  -webkit-transform $ts_time $ts_type;
+  -moz-transition: -moz-transform $ts_time $ts_type;
+  -o-transition: -o-transform $ts_time $ts_type;
+  transition: transform $ts_time $ts_type;
+
+  .bottom-bar{
+    height: $h_bottom;
+  }
+
+  .top-bar {
+    height: $h_top;
+  }
+
+  .time-bar {
+    height: $h_time;
+    .icon {
+      min-width: 50px;
+      font-size: 14px;
+    }
+  }
+
+  .action-bar {
+    height: $h_action;
+    .left {
+      float: left;
+      margin-left: 35px;
+    }
+    .right {
+      float: right;
+      margin-right: 35px;
+    }
+    .mid {
+      clear: both;
+    }
+  }
+
+  .button-footer {
+    display: inline-block;
+    border-radius: 1px;
+    height: 50px;
+    margin-bottom: 10px;
+    margin-top: 9px;
+    width: 60px;
+    box-shadow: 0 1px 1.5px 0 rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.24);
+    position: relative;
+    line-height: normal;
+    background-color: #ef473a;
+    &:active {
+      background-color: rgba(239, 71, 58, 0.81);
+      box-shadow: 0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12),0 2px 4px -1px rgba(0,0,0,.2);
+    }
+    .icon {
+      color: white;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      font-size: 26px;
+      -webkit-transform: translate(-12px, -14px);
+      -ms-transform: translate(-12px, -14px);
+      transform: translate(-12px, -14px);
+      line-height: 29px;
+      width: 24px;
+      text-align: center;
+    }
+    .ion-play {
+      -webkit-transform: translate(-11px, -14px);
+      -ms-transform: translate(-11px, -14px);
+      transform: translate(-11px, -14px);
+    }
+  }
+}
+
+.footer-ctrl.open {
+  -webkit-transform: $tf_translate_open;
+  -moz-transform:    $tf_translate_open;
+  -o-transform:      $tf_translate_open;
+  transform:         $tf_translate_open;
+}

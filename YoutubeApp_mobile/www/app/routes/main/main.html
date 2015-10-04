@@ -1,0 +1,14 @@
+<ion-view>
+  <ion-side-menus>
+    <!-- Left menu -->
+    <ion-side-menu side="left">
+      <div ng-include="'app/components/menu/menu.html'"></div>
+    </ion-side-menu>
+
+    <ion-side-menu-content>
+      <div ng-include="'app/components/header/header.html'"></div>
+      <ion-nav-view class="has-header"></ion-nav-view>
+    </ion-side-menu-content>
+
+  </ion-side-menus>
+</ion-view>

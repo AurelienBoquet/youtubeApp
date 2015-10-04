@@ -1,0 +1,38 @@
+<ion-view class="row row-bottom pane row-no-padding">
+    <!-- signin -->
+    <div class="list col" ng-if="actif === 'signin'">
+      <div class="padding-bottom">
+        <label class="item item-input input-assertive">
+          <input type="text" ng-model="data.login" placeholder="Login">
+        </label>
+        <label class="item item-input input-assertive">
+          <input type="password" ng-model="data.password" placeholder="Password">
+        </label>
+      </div>
+
+      <div class="padding">
+        <button class="button button-block button-assertive" ng-click="submit()">Submit</button>
+      </div>
+
+      <p class="item">You don't have an account? <a href ng-click="changeActif('signup')">Signup!</a></p>
+    </div>
+
+    <!-- signup -->
+    <div class="list col" ng-if="actif === 'signup'">
+      <label class="item item-input input-assertive">
+        <input type="text" ng-model="data.username" placeholder="Username">
+      </label>
+      <label class="item item-input input-assertive">
+        <input type="email" ng-model="data.email" placeholder="Email">
+      </label>
+      <label class="item item-input input-assertive">
+        <input type="text" ng-model="data.password" placeholder="Password">
+      </label>
+
+      <div class="padding">
+        <button class="button button-block button-assertive" ng-click="submit()">Submit</button>
+      </div>
+
+      <p class="item">Already have an account? <a href ng-click="changeActif('signin')">Signin!</a></p>
+    </div>
+</ion-view>

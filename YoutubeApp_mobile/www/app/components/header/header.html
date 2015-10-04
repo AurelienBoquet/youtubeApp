@@ -1,0 +1,16 @@
+<div ng-controller="HeaderCtrl">
+  <ion-header-bar  align-title="center" class="bar-assertive">
+    <div class="header-wrap" >
+      <div class="buttons">
+        <i class="button button-icon icon ion-navicon" menu-toggle="left"></i>
+      </div>
+      <h1 class="title">Gatsbill App</h1>
+      <div class="research-bar" ng-class="{'actif': researchBar}">
+        <div class="buttons" ng-click="activateResearchBar()">
+          <i class="button button-icon icon ion-ios-search-strong"></i>
+        </div>
+        <input type="text" ng-model="research" ng-change="searchVideo()">
+      </div>
+    </div>
+  </ion-header-bar>
+</div>
