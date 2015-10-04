@@ -1,6 +1,6 @@
 angular.module('youtubeApp')
   .factory('socket', function ($rootScope) {
-    var socket = io.connect('http://127.0.0.1:7000');
+    var socket = io.connect('http://51.254.132.38:7000');
     return {
       on: function (eventName, callback) {
         socket.on(eventName, function () {
