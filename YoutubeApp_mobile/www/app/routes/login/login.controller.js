@@ -1,6 +1,6 @@
 angular.module('youtubeApp')
   .controller('LoginCtrl', function($scope, socket, $state, localStorage, connection) {
-    "use strict";
+
 
     // init val
     $scope.actif = 'signin';

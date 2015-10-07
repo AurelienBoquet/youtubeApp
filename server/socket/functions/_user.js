@@ -19,8 +19,7 @@ exports.signUp = function(socket, data) {
 
       db.users.insert(userData, function (err, user) {
         if (user) {
-          console.log(user, user.username + ' has been created');
-          socket.emit('signup', user)
+          socket.emit('signup', user);
         }
       });
 
@@ -49,7 +48,6 @@ exports.signIn = function(socket, data) {
 
           socket.emit('signin', user);
           socket.join(user._id);
-          console.log(user.username + ' is now logged', user);
         }
       } else {
         console.log('signin', 'no user found');
@@ -62,7 +60,6 @@ exports.isLoggedIn = function(socket, token) {
     if (err) { console.log(err); }
 
     if (user) {
-      console.log('loggedIn', user);
       socket.emit('loggedIn', user);
     }
   });

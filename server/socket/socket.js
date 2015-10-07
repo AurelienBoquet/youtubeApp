@@ -6,13 +6,11 @@ module.exports = function(io) {
     var _socket = socket;
 
     socket.on('joinRoom', function(room) {
-      console.log('join room: ' + room);
       _socket.join(room);
       _socket._room = room;
     });
 
     socket.on('logoutDesktop', function () {
-      console.log('in logout');
       socket.leave(_socket._room);
       _socket._room = false;
     });
@@ -25,7 +23,6 @@ module.exports = function(io) {
 
     // require all socket controllers
     require('./controller/user')(_socket);
-    //require('./controller/device')(_socket);
     require('./controller/youtube')(_socket);
   })
 };

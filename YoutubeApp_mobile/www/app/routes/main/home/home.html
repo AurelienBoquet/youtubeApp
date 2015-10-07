@@ -4,14 +4,6 @@
 
     <div ng-hide="videoList.items" class="research padding">
 
-      <!-- google connexion -->
-      <div class="full-width cont padding google-connect" ng-if="!isApiLoaded">
-        <img src="img/google-logo.png" alt="google logo">
-        <p>A google account is needed</p>
-        <button class="button button-block button-assertive" ng-click="loadApi()">Connect</button>
-      </div>
-
-
       <div ng-if="noVideoFound" class="cont full-width noVideo padding">
         No video Found
       </div>
@@ -48,11 +40,6 @@
 
   <div class="footer-ctrl" ng-class="{'open': footerIsOpen}">
     <div class="top-bar" ng-click="openFooter()"></div>
-    <!--<div class="item range time-bar">
-      <i class="icon" ng-bind="duration | secondToTime"></i>
-      <input type="range" name="" ng-model="duration" min="0" max="{{videoStats.duration}}" ng-change="setDuration()">
-      <i class="icon" ng-cloak ng-bind="videoStats.duration | secondToTime"></i>
-    </div>-->
     <div class="action-bar">
       <div class="button-footer left">
         <!-- ion-pause ion-play -->

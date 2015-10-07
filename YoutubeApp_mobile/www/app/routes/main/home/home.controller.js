@@ -1,9 +1,5 @@
 angular.module('youtubeApp')
   .controller('HomeCtrl', function($scope, $rootScope, $ionicScrollDelegate, socket, video, $interval, youtube) {
-    "use strict";
-
-    // graphical bug
-    $scope.isApiLoaded = true;
 
     var timer;
     $scope.hasResearched = false;
@@ -23,20 +19,8 @@ angular.module('youtubeApp')
       $scope.duration = 0;
     }
 
-    /*function createTimer() {
-      timer = $interval(function() {
-        $scope.duration++;
-      }, 1000)
-    }
-
-    function deleteTimer() {
-      if (timer) {
-        $interval.cancel(timer);
-      }
-    }*/
-
     $scope.searchVideo = function() {
-      if ($scope.form.search && $scope.isApiLoaded) {
+      if ($scope.form.search) {
         youtube.videoSearchByKeyWord($scope.form.search);
       }
     };
@@ -46,7 +30,6 @@ angular.module('youtubeApp')
 
       video.choose(data, function() {
         $scope.footerIsOpen = true;
-        //createTimer();
       });
     };
 
@@ -54,24 +37,10 @@ angular.module('youtubeApp')
       reset();
     });
 
-    /*$rootScope.$on('videoNowPlay', function() {
-      if (timer) {
-        createTimer();
-      }
-    });
-
-    $rootScope.$on('videoNowPause', function() {
-      deleteTimer();
-    });*/
-
     // video actions
     $scope.setVolume = function() {
       video.setVolume($scope.volume);
     };
-
-    /*$scope.setDuration = function() {
-      video.setDuration($scope.duration);
-    };*/
 
     $scope.playPauseVideo = function() {
       if (video.isPlay) {
@@ -98,31 +67,6 @@ angular.module('youtubeApp')
       }
     };
 
-
-    // load api
-    $scope.loadApi = function() {
-      youtube.loadApiOnClick();
-    };
-
-    $rootScope.$on('googleApiNotLoaded', function() {
-      $scope.isApiLoaded = false;
-
-      var phase = $scope.$root.$$phase;
-      if (phase !== '$apply' && phase !== '$digest') {
-        $scope.$apply();
-      }
-    });
-
-    $rootScope.$on('googleApiLoaded', function() {
-      $scope.isApiLoaded = true;
-
-      var phase = $scope.$root.$$phase;
-      if (phase !== '$apply' && phase !== '$digest') {
-        $scope.$apply();
-      }
-    });
-
-
     // show researched video
     $rootScope.$on('videoResult', function(event, result) {
 
@@ -138,7 +82,6 @@ angular.module('youtubeApp')
         // put user at the top of his research
         $ionicScrollDelegate.scrollTop();
 
-        // needed to change data in ng-repeat
       } else {
         $scope.noVideoFound = true;
         $scope.hasResearched = false;
@@ -193,7 +136,4 @@ angular.module('youtubeApp')
       }
     });
 
-    /*$scope.$on("$destroy", function() {
-      deleteTimer();
-    });*/
   });
