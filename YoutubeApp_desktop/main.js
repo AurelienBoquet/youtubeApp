@@ -35,7 +35,7 @@ app.on('ready', function() {
   mainWindow.loadUrl('file://' + __dirname + '/main/_main.html');
 
   // Open the DevTools.
-  mainWindow.openDevTools();
+  //mainWindow.openDevTools();
 
   var wcMain = mainWindow.webContents;
 
@@ -60,7 +60,7 @@ app.on('ready', function() {
       videoWindow.loadUrl('file://' + __dirname + '/video/_video.html');
 
       // Open the DevTools.
-      videoWindow.openDevTools();
+      //videoWindow.openDevTools();//
 
       wcVideo = videoWindow.webContents;
 
