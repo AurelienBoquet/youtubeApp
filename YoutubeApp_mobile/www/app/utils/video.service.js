@@ -2,8 +2,6 @@ angular.module('youtubeApp').
   service('video', function(socket, $timeout, youtube, $rootScope) {
 
   var _timerVolume;
-  var _timerDuration;
-  var _state = -1;
   var _video = {};
   var self = this;
 
@@ -48,20 +46,6 @@ angular.module('youtubeApp').
   };
 
 
-  // receive data
-  socket.on('sendState', function(state) {
-    if (_state !== state) {
-      if (state === 0 || state === 2 || state === 3) {
-        $rootScope.$emit('videoNowPause');
-      } else {
-        $rootScope.$emit('videoNowPlay');
-      }
-    }
-  });
-
-
-
-
   // player actions
   this.play = function() {
     self.isPlay = true;
@@ -95,17 +79,6 @@ angular.module('youtubeApp').
 
     _timerVolume = $timeout(function() {
       socket.emit('setVolume', volume);
-    }, 550);
-
-  };
-
-  this.setDuration = function(duration) {
-    if (_timerDuration) {
-      $timeout.cancel(_timerDuration);
-    }
-
-    _timerDuration = $timeout(function() {
-      socket.emit('setDuration', duration);
     }, 550);
 
   };

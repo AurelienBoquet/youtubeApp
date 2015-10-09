@@ -47,7 +47,6 @@ exports.signIn = function(socket, data) {
           }
 
           socket.emit('signin', user);
-          socket.join(user._id);
         }
       } else {
         console.log('signin', 'no user found');

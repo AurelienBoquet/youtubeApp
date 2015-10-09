@@ -102,9 +102,7 @@ angular.module('youtubeApp')
             $scope.hasMoreVideo = (result.nextPageToken) ? true : false;
 
             if (result.items.length) {
-              if (result.nextPageToken) {
-                $scope.videoList.nextPageToken = result.nextPageToken;
-              }
+              $scope.videoList.nextPageToken = (result.nextPageToken) ? result.nextPageToken : null;
 
               result.items.forEach(function(item) {
                 $scope.videoList.items.push(item);
