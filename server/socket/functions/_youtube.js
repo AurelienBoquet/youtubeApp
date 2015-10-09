@@ -57,6 +57,7 @@ exports.videoSearchByKeyWord = function(socket, input) {
     if (err) { console.log(err) }
 
     if (response) {
+      console.log('videoSearchByKeyWord', response);
       socket.emit('videoSearchByKeyWord', response);
     }
   });
@@ -76,6 +77,7 @@ exports.videoGetNextPage = function(socket, input, token) {
     if (err) { console.log(err) }
 
     if (response) {
+      console.log('videoGetNextPage', response);
       socket.emit('videoGetNextPage', response);
     }
   });
@@ -92,6 +94,7 @@ exports.videoGetData = function(socket, id) {
     if (err) { console.log(err) }
 
     if (response) {
+      console.log('videoGetData', response);
       socket.emit('videoGetData', response);
     }
   });

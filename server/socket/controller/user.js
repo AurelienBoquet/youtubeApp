@@ -1,6 +1,7 @@
 var _user = require('../functions/_user');
 
 module.exports = function(socket) {
+
   socket.on('signup', function (data) {
     _user.signUp(socket, data);
   });
